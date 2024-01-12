@@ -12,19 +12,8 @@ BETA2 = 1e5
 
 def main():
 
-    torch.manual_seed(0)
+    torch.manual_seed(420)
     device = "cpu" # torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-
-    # Try storing random data
-    keys = torch.rand((MEMORY_SIZE, PATTERN_SIZE)).float().to(device)
-    queries = torch.rand((BATCH_SIZE, PATTERN_SIZE)).float().to(device)
-
-    memory = ModernHopfieldNetwork(keys)
-
-    recall = memory(queries, BETA)
-    print(recall.shape)
-
 
 
     # Try storing MNIST data
@@ -33,7 +22,7 @@ def main():
 
     memory = ModernHopfieldNetwork(imgs)
 
-    for i in range(5):
+    for i in range(10):
 
         query = imgs[i:i+1].clone()
 
