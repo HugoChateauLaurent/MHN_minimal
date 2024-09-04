@@ -21,10 +21,12 @@ class ModernHopfieldNetwork:
         # Separate similarity scores
         sim_score = F.softmax(beta * sim_score, dim=1)
 
+        # Sample from the similarity scores
         if sample:
             choices = torch.multinomial(sim_score, 1)
             sim_score = F.one_hot(choices, sim_score.size(1)).float()
 
 
+        # Project back to the original space
         out = torch.matmul(sim_score, self.K)
         return out

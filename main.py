@@ -9,12 +9,12 @@ MEMORY_SIZE = 1000
 PATTERN_SIZE = 28**2
 BETA = .05
 BETA2 = 1e5
+N_EXAMPLES = 5
 
 def main():
 
     torch.manual_seed(420)
     device = "cpu" # torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
 
     # Try storing MNIST data
     mnist = torchvision.datasets.MNIST('./data', download=True)
@@ -22,12 +22,12 @@ def main():
 
     memory = ModernHopfieldNetwork(imgs)
 
-    for i in range(10):
+    for i in range(N_EXAMPLES):
 
-        query = imgs[i:i+1].clone()
+        query = imgs[i:i+1].clone() # Shape: (1, 784)
 
         fig, ax = plt.subplots(nrows=1, ncols=6, figsize=(12,4))
-        fig.suptitle("Example "+str(i+1)+"/5")
+        fig.suptitle("Example "+str(i+1)+"/"+str(N_EXAMPLES))
 
         ax[0].matshow(query.reshape(28,28), cmap="gray")
         ax[0].title.set_text("Original")
